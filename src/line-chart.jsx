@@ -57,7 +57,23 @@ const RainChart = () => {
 
     return (
         <div className='chart-container'>
+            <div>
+            <div className="legend">
+                <div className="legend-item">
+                    <span className="legend-color" style={{ backgroundColor: colors.line1 }}></span>
+                    <span>Función 1</span>
+                </div>
+                <div className="legend-item">
+                    <span className="legend-color" style={{ backgroundColor: colors.line2 }}></span>
+                    <span>Función 2</span>
+                </div>
+                <div className="legend-item">
+                    <span className="legend-color" style={{ backgroundColor: colors.line3 }}></span>
+                    <span>Función 3</span>
+                </div>
+            </div>
             <canvas ref={canvasRef} width={400} height={400} />
+            </div>
             <section className='options'>
                 <section className='color-picker'>
                     <div>
@@ -88,11 +104,11 @@ const RainChart = () => {
                 <section className='grid-settings'>
                     <div>
                         <p>Linea verticales y: </p>
-                        <input 
+                        <input
                             value={lines.gridY}
                             type="text"
                             placeholder='jumero de lineas'
-                            onChange={handleYGridChange}    
+                            onChange={handleYGridChange}
                         />
                     </div>
                     <div>
@@ -101,11 +117,11 @@ const RainChart = () => {
                             value={lines.gridX}
                             type="text"
                             placeholder='jumero de lineas'
-                            onChange={handleXGridChange}    
+                            onChange={handleXGridChange}
                         />
                     </div>
                     <div className='buttons'>
-                        <button  onClick={handleGridChange} >Aplicar</button>
+                        <button onClick={handleGridChange} >Aplicar</button>
                         <button className='delete' onClick={handleReset}>Borrar</button>
                     </div>
                 </section>
