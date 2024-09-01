@@ -8,6 +8,13 @@ h1 {
   color: white;
 }
 
+label {
+  width: 100px;
+  margin-left: 10px;
+  font-size: 1.2rem;
+  color: white;
+}
+
 .chart-container {
   width: 400px;
   height: 400px;
@@ -17,6 +24,55 @@ h1 {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+}
+
+.color-picker > div {
+  width: 200px;
+}
+
+.options {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.options > section {
+  margin-bottom: 10px;
+}
+
+.grid-settings {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.grid-settings p {
+  width: 90%;
+  font-size: 20px;
+  color: white;
+}
+
+.grid-settings  input {
+  width: 100px;
+  height: 20px;
+}
+
+.grid-settings button {
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: green;
+  background-color: green;
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+}
+
+.buttons > .delete {
+  background-color: red;
 }
 
 canvas {
