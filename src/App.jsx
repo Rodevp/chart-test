@@ -7,9 +7,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <LineChart   data1={lastMonthData} data2={previousMonthData} />
-      </div>
+      <h1>Variacion de precipitaciones semanales</h1>
+      <LineChart   data1={lastMonthData} data2={previousMonthData} />
     </>
   )
 }

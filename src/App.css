@@ -2,10 +2,15 @@ body {
   background-color: #1C1C1C;
 }
 
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+}
 
 .chart-container {
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
   border-radius: 15px;
   padding: 20px;
   display: flex;
