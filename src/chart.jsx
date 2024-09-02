@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
 import useCanvasLineChart from './hooks/use-line-chart';
 import useCanvasBarChart from './hooks/use-bar-chart';
 import usePaintGrid from './hooks/use-paint-grid';
