@@ -1,17 +1,12 @@
-const useCanvasChart = (canvasRef, colors, gridX, gridY) => {
+const useCanvasLineChart = (canvasRef, config, dataSets = []) => {
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    const dataSets = [
-        { data: [10, 20, 15, 5, 30, 25, 40], color: colors.line1 },
-        { data: [5, 15, 10, 20, 25, 30, 35], color: colors.line2 },
-        { data: [20, 10, 25, 15, 10, 20, 30], color: colors.line3 }
-    ];
-    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    console.log(config)
 
-    const chartWidth = 400;
-    const chartHeight = 400;
-    const padding = 40;
+    const { labels, chartHeight, chartWidth, padding } = config
+
     const pointRadius = 5;
     const lineDrawDuration = 1000;
     const pointDrawDelay = 1000;
@@ -19,32 +14,6 @@ const useCanvasChart = (canvasRef, colors, gridX, gridY) => {
     // Fondo del canvas
     ctx.fillStyle = '#232323';
     ctx.fillRect(0, 0, chartWidth, chartHeight);
-
-    // Dibujar cuadrícula
-    const drawGrid = () => {
-        ctx.strokeStyle = '#444';
-        ctx.lineWidth = 1;
-
-        // Líneas verticales
-        for (let i = 0; i <= gridX; i++) {
-            const x = padding + i * ((chartWidth - 2 * padding) / gridX);
-            ctx.beginPath();
-            ctx.moveTo(x, padding);
-            ctx.lineTo(x, chartHeight - padding);
-            ctx.stroke();
-        }
-
-        // Líneas horizontales
-        for (let i = 0; i <= gridY; i++) {
-            const y = padding + i * ((chartHeight - 2 * padding) / gridY);
-            ctx.beginPath();
-            ctx.moveTo(padding, y);
-            ctx.lineTo(chartWidth - padding, y);
-            ctx.stroke();
-        }
-    };
-
-    drawGrid();
 
     // Dibujar etiquetas en el eje X
     ctx.fillStyle = '#FFFFFF';
@@ -121,4 +90,4 @@ const useCanvasChart = (canvasRef, colors, gridX, gridY) => {
 
 };
 
-export default useCanvasChart;
+export default useCanvasLineChart;

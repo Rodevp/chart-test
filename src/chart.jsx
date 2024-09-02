@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useCanvasChart from './hooks/use-line-chart';
+import useCanvasLineChart from './hooks/use-line-chart';
+import useCanvasBarChart from './hooks/use-bar-chart';
+import usePaintGrid from './hooks/use-paint-grid';
 
-const RainChart = () => {
+const Chart = () => {
 
     const canvasRef = useRef(null);
 
@@ -18,9 +20,33 @@ const RainChart = () => {
         gridY: ''
     });
 
+    const [typeChart, setTypeChart] = useState('line');
+
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const datasets = [
+        { data: [10, 20, 15, 5, 30, 25, 40], color: colors.line1 },
+        { data: [5, 15, 10, 20, 25, 30, 35], color: colors.line2 },
+        { data: [20, 10, 25, 15, 10, 20, 30], color: colors.line3 }
+    ];
+
+    const CONFIG = {
+        labels: labels,
+        chartWidth: 400,
+        chartHeight: 400,
+        padding: 40,
+    }
+
     useEffect(() => {
-        useCanvasChart(canvasRef, colors, lines.gridX, lines.gridY)
-    }, [colors, changeGrid])
+
+        if (typeChart === 'line') {
+            useCanvasLineChart(canvasRef, CONFIG, datasets);
+        } else {
+            useCanvasBarChart(canvasRef, CONFIG, datasets);
+        }
+
+        usePaintGrid(canvasRef, lines.gridX, lines.gridY);
+
+    }, [colors, changeGrid, typeChart])
 
     const handleColorChange = (line, color) => {
         setColors(prevColors => ({
@@ -55,24 +81,27 @@ const RainChart = () => {
         setChangeGrid(false);
     };
 
+    const lineChartChange = () => setTypeChart('line');
+    const barChartChange = () => setTypeChart('bar');
+
     return (
         <div className='chart-container'>
             <div>
-            <div className="legend">
-                <div className="legend-item">
-                    <span className="legend-color" style={{ backgroundColor: colors.line1 }}></span>
-                    <span>Función 1</span>
+                <div className="legend">
+                    <div className="legend-item">
+                        <span className="legend-color" style={{ backgroundColor: colors.line1 }}></span>
+                        <span>Función 1</span>
+                    </div>
+                    <div className="legend-item">
+                        <span className="legend-color" style={{ backgroundColor: colors.line2 }}></span>
+                        <span>Función 2</span>
+                    </div>
+                    <div className="legend-item">
+                        <span className="legend-color" style={{ backgroundColor: colors.line3 }}></span>
+                        <span>Función 3</span>
+                    </div>
                 </div>
-                <div className="legend-item">
-                    <span className="legend-color" style={{ backgroundColor: colors.line2 }}></span>
-                    <span>Función 2</span>
-                </div>
-                <div className="legend-item">
-                    <span className="legend-color" style={{ backgroundColor: colors.line3 }}></span>
-                    <span>Función 3</span>
-                </div>
-            </div>
-            <canvas ref={canvasRef} width={400} height={400} />
+                <canvas ref={canvasRef} width={400} height={400} />
             </div>
             <section className='options'>
                 <section className='color-picker'>
@@ -125,9 +154,16 @@ const RainChart = () => {
                         <button className='delete' onClick={handleReset}>Borrar</button>
                     </div>
                 </section>
+                <section className='type-chart'>
+                    <h4>Tipo de grafico</h4>
+                    <div>
+                        <button className='button-chart' onClick={lineChartChange}>Line</button>
+                        <button className='button-chart' onClick={barChartChange}>Bar</button>
+                    </div>
+                </section>
             </section>
         </div>
     );
 };
 
-export default RainChart;
+export default Chart;
