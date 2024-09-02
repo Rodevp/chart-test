@@ -3,8 +3,6 @@ const useCanvasLineChart = (canvasRef, config, dataSets = []) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    console.log(config)
-
     const { labels, chartHeight, chartWidth, padding } = config
 
     const pointRadius = 5;

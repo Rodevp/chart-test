@@ -6,9 +6,11 @@ import usePaintGrid from './hooks/use-paint-grid';
 
 const Chart = () => {
 
+    const data = JSON.parse(localStorage.getItem('data'));
+
     const canvasRef = useRef(null);
 
-    const [colors, setColors] = useState({
+    const [colors, setColors] = useState( data?.colors || {
         line1: '#FF6B6B',
         line2: '#4ECDC4',
         line3: '#F7B32B',
@@ -16,12 +18,12 @@ const Chart = () => {
 
     const [changeGrid, setChangeGrid] = useState(false);
 
-    const [lines, setLines] = useState({
+    const [lines, setLines] = useState( data?.lines || {
         gridX: '',
         gridY: ''
     });
 
-    const [typeChart, setTypeChart] = useState('line');
+    const [typeChart, setTypeChart] = useState( data?.typeChart || null);
 
     const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const datasets = [
@@ -38,12 +40,20 @@ const Chart = () => {
     }
 
     useEffect(() => {
+        
+        localStorage.setItem('data', JSON.stringify({
+            lines,
+            colors,
+            typeChart
+        }));
 
-        if (typeChart === 'line') {
-            useCanvasLineChart(canvasRef, CONFIG, datasets);
-        } else {
-            useCanvasBarChart(canvasRef, CONFIG, datasets);
-        }
+    }, [typeChart, lines, colors]);
+
+    useEffect(() => {
+
+        if (typeChart === 'line') useCanvasLineChart(canvasRef, CONFIG, datasets);
+        
+        if (typeChart === 'bar') useCanvasBarChart(canvasRef, CONFIG, datasets);
 
         usePaintGrid(canvasRef, lines.gridX, lines.gridY);
 
