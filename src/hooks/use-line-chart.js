@@ -8,8 +8,8 @@ const useCanvasLineChart = (canvasRef, config, dataSets = []) => {
     const { labels, chartHeight, chartWidth, padding } = config
 
     const pointRadius = 5;
-    const lineDrawDuration = 1000;
-    const pointDrawDelay = 1000;
+    const lineDrawDuration = 400;
+    const pointDrawDelay = 250;
 
     // Fondo del canvas
     ctx.fillStyle = '#232323';
